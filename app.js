@@ -150,6 +150,15 @@ app.post('/access', function(req,res){
         });    
 });
 
+/**
+ * Remove the ionapi file from server
+ */
+app.post('/remove', function(req,res){
+    let api = req.body.api;
+    fs.unlinkSync(path.join(__dirname + '/file', api));
+    setTimeout(()=>{},1000);
+    res.redirect('/');
+});
 
 /**
  * Start Server

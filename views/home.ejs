@@ -57,7 +57,13 @@
                             <td>
                                 <form action="/connect" method="POST">
                                 <input type="hidden" name="api" value="<%=file%>">
-                                <input type="submit" value="Authenticate">
+                                <input type="submit" value="Authorize">
+                                </form>
+                            </td>
+                            <td>    
+                                <form action="/remove" method="POST">
+                                <input type="hidden" name="api" value="<%=file%>">
+                                <input type="submit" value="Delete">
                                 </form>
                             </td>    
                         </tr>
