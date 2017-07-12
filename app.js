@@ -23,6 +23,9 @@ if (typeof localStorage === "undefined" || localStorage === null) {
   var localStorage = new LocalStorage('./scratch');
 }
 
+// clear localstorage at any start
+localStorage.clear();
+
 const app = express();
 const port = 3000;
 
