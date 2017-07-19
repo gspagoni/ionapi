@@ -17,6 +17,7 @@ const request = require('request');
 const fs = require('fs');
 const jsonfile = require('jsonfile')
 const fileUpload = require('express-fileupload');
+const favicon = require('serve-favicon');
 
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
@@ -31,6 +32,7 @@ const port = 3000;
 
 app.set('view engine', 'ejs'); 
 app.use(express.static(__dirname + "/public"));
+app.use(favicon(path.join(__dirname,'public','image','favicon.ico')));
 app.use(fileUpload());
 
 app.use(bodyParser.urlencoded({extended:true}));
