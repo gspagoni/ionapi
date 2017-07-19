@@ -32,6 +32,7 @@ const port = 3000;
 
 app.set('view engine', 'ejs'); 
 app.use(express.static(__dirname + "/public"));
+// display infor image
 app.use(favicon(path.join(__dirname,'public','image','favicon.ico')));
 app.use(fileUpload());
 
