@@ -28,7 +28,7 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 localStorage.clear();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs'); 
 app.use(express.static(__dirname + "/public"));
@@ -140,8 +140,8 @@ app.post('/access', function(req,res){
                 }
 
        // Build the URL to call for getting access token
-        var urlapi = localStorage.getItem('pu_' + api) + localStorage.getItem('ot_' + api) + '/';
-
+        var urlapi = localStorage.getItem('pu_' + api) + localStorage.getItem('ot_' + api);
+        console.log('urlapi --> ' + urlapi);        
         request.post(urlapi, args, function(err,data,response){
                 if(err)
                 {
