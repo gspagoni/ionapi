@@ -157,6 +157,46 @@ app.post('/access', function(req,res){
 });
 
 /**
+ *  Get Refresh Token
+ */
+
+app.post('/refresh', function(req,res){
+  let refreshToken = req.body.refreshToken;
+  let api  = localStorage.getItem('api');
+  console.log('refreshToken ' + refreshToken);
+
+  // Prepare data for request the refresh token
+  var args =  {
+                  form:
+                  {
+                      'refresh_token': `${refreshToken}`,
+                      'client_id': localStorage.getItem('ci_' + api),//'infor~62hEkBLpdrXINBI5Byh4NVAu9JuZmpO7NyMANis65xU',
+                      'client_secret': localStorage.getItem('cs_' + api),//'50q9KvQmXbzitshbV79RIm030Oz3OSq1JBwly7ibjdzCZEmWr1UvhRRkaop-yYWyMUJLKtHCWTHU2cBXZ2OlJg',
+                      'grant_type':'refresh_token'
+                  },
+                  
+                  rejectUnauthorized: false
+              }
+
+     // Build the URL to call for getting access token
+      var urlapi = localStorage.getItem('pu_' + api) + localStorage.getItem('ot_' + api);
+      console.log('urlapi --> ' + urlapi);        
+      request.post(urlapi, args, function(err,data,response){
+              if(err)
+              {
+                  console.log('error');
+                  console.log(err);
+              }
+              else{
+                 console.log(response);
+                 var outMessage = JSON.parse(response);
+                  res.render('showRefresh',{outMessage:outMessage});
+              }
+      });    
+});
+
+
+/**
  * Remove the ionapi file from server
  */
 app.post('/remove', function(req,res){
