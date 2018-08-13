@@ -4,7 +4,8 @@
  *  Author  : Giampaolo Spagoni
  *  Email   : giampaolo.spagoni@infor.com
  *  Title   : Technical Senior Solution Architect
- *  Company : INFOR - Platform Technology Group EMEA
+ *  Company : INFOR - Infor OS Service EMEA
+ *  Date    : 13th August 2018
  * 
  */
 
@@ -109,6 +110,13 @@ app.post('/connect', function(req,res){
             localStorage.setItem('or_' + api , obj.or);
             localStorage.setItem('ev_' + api , obj.ev);
             localStorage.setItem('v_' + api , obj.v);
+            console.log('obj.ru :' + obj.ru )
+            if (obj.ru === undefined || obj.ru === null || obj.ru ===''){
+                obj.ru = 'http://localhost:'+ port + '/redirect.html';
+                localStorage.setItem('ru_' + api , obj.ru);
+            }else{
+                localStorage.setItem('ru_' + api , obj.ru);
+            }            
          }
          var url = obj.pu + obj.oa + '?client_id=' + obj.ci + '&response_type=code&redirect_uri=http://localhost:'+ port + '/redirect.html';
          res.redirect(url);

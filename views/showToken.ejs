@@ -27,25 +27,31 @@
                     <td><img src="../image/nodejs.png" /></td>
                 </tr>                    
             </table>    
-        
-            <table class="table">
-                <tr>
-                    <td>Access_Token</td>
-                    <td><%=outMessage.access_token%></td>
-                </tr>
-                <tr>
-                    <td>Expires</td>
-                    <td><%=outMessage.expires_in%></td>
-                </tr>
-                <tr>
-                    <td>Token_Type</td>
-                    <td><%=outMessage.token_type%></td>
-                </tr>
-                <tr>
-                    <td>Refresh_Token</td>
-                    <td><%=outMessage.refresh_token%></td>
-                </tr>
-            </table>
+
+            <form action="refresh" method="POST" align=center>                
+                <table class="table">
+                    <tr>
+                        <td>Access_Token</td>
+                        <td><%=outMessage.access_token%></td>
+                    </tr>
+                    <tr>
+                        <td>Expires</td>
+                        <td><%=outMessage.expires_in%></td>
+                    </tr>
+                    <tr>
+                        <td>Token_Type</td>
+                        <td><%=outMessage.token_type%></td>
+                    </tr>
+                    <tr>
+                        <td>Refresh_Token</td>
+                        <td><%=outMessage.refresh_token%></td>
+                    </tr>
+                </table>
+                <br>
+                <input type="hidden" name="refreshToken" value="<%=outMessage.refresh_token%>">
+                
+                <input type="submit" value="Refresh Token">                                    
+            </form>
         </div>
         <%- include('partials/footer') %>
     </div>   
