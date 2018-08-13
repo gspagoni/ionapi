@@ -28,7 +28,7 @@
                 </tr>                    
             </table>    
 
-            <form action="refresh" method="POST" align=center>                
+            <form action="refresh" method="POST">                
                 <table class="table">
                     <tr>
                         <td>Access_Token</td>
@@ -48,9 +48,10 @@
                     </tr>
                 </table>
                 <br>
-                <input type="hidden" name="refreshToken" value="<%=outMessage.refresh_token%>">
-                
-                <input type="submit" value="Refresh Token">                                    
+                <div align="center">
+                    <input type="hidden" name="refreshToken" value="<%=outMessage.refresh_token%>">
+                    <input type="submit" value="Refresh Token">
+                </div>                                    
             </form>
         </div>
         <%- include('partials/footer') %>
