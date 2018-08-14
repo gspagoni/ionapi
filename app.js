@@ -54,14 +54,17 @@ app.get('/redirect.html', function(req, res){
 // default root - Home Page
 app.get('/', function(req,res){
     let files;
-    try {
+    if (!fs.existsSync(__dirname + "/file")){
+        fs.mkdirSync(__dirname + "/file");
+    }    
+ //   try {
       files = fs.readdirSync(__dirname + "/file");      
-    } catch (error) {
-      fs.mkdir(__dirname + "/file");
+ //   } catch (error) {
+ //     fs.mkdir(__dirname + "/file");
       // wait 1 sec otherwise i get error to read files from created folder
-      setTimeout(()=>{},1000);
-      files = fs.readdirSync(__dirname + "/file");      
-    }
+ //     setTimeout(()=>{},1000);
+ //     files = fs.readdirSync(__dirname + "/file");      
+ //   }
     res.render('home',{files:files});
 });
 
