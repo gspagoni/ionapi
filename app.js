@@ -4,7 +4,8 @@
  *  Author  : Giampaolo Spagoni
  *  Email   : giampaolo.spagoni@infor.com
  *  Title   : Technical Senior Solution Architect
- *  Company : INFOR - Platform Technology Group EMEA
+ *  Company : INFOR - Infor OS Service EMEA
+ *  Date    : 13th August 2018
  * 
  */
 
@@ -28,7 +29,7 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 localStorage.clear();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs'); 
 app.use(express.static(__dirname + "/public"));
@@ -53,14 +54,17 @@ app.get('/redirect.html', function(req, res){
 // default root - Home Page
 app.get('/', function(req,res){
     let files;
-    try {
+    if (!fs.existsSync(__dirname + "/file")){
+        fs.mkdirSync(__dirname + "/file");
+    }    
+ //   try {
       files = fs.readdirSync(__dirname + "/file");      
-    } catch (error) {
-      fs.mkdir(__dirname + "/file");
+ //   } catch (error) {
+ //     fs.mkdir(__dirname + "/file");
       // wait 1 sec otherwise i get error to read files from created folder
-      setTimeout(()=>{},1000);
-      files = fs.readdirSync(__dirname + "/file");      
-    }
+ //     setTimeout(()=>{},1000);
+ //     files = fs.readdirSync(__dirname + "/file");      
+ //   }
     res.render('home',{files:files});
 });
 
@@ -109,6 +113,13 @@ app.post('/connect', function(req,res){
             localStorage.setItem('or_' + api , obj.or);
             localStorage.setItem('ev_' + api , obj.ev);
             localStorage.setItem('v_' + api , obj.v);
+            console.log('obj.ru :' + obj.ru )
+            if (obj.ru === undefined || obj.ru === null || obj.ru ===''){
+                obj.ru = 'http://localhost:'+ port + '/redirect.html';
+                localStorage.setItem('ru_' + api , obj.ru);
+            }else{
+                localStorage.setItem('ru_' + api , obj.ru);
+            }            
          }
          var url = obj.pu + obj.oa + '?client_id=' + obj.ci + '&response_type=code&redirect_uri=http://localhost:'+ port + '/redirect.html';
          res.redirect(url);
